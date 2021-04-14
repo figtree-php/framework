@@ -1,0 +1,29 @@
+{
+	"name": "figtree-php/framework",
+	"description": "FigTree Framework",
+	"type": "library",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Alan Ondra",
+			"email": "r.alan.ondra@gmail.com",
+			"role": "Creator"
+		}
+	],
+	"support": {
+		"email": "figtree.php@gmail.com",
+		"source": "https://github.com/figtree-php/framework",
+		"issues": "https://github.com/figtree-php/framework/issues",
+		"wiki": "https://github.com/figtree-php/framework/wiki"
+	},
+	"autoload": {
+		"psr-4": {
+			"FigTree\\Framework": "src/",
+			"FigTree\\Framework\\Tests": "tests/"
+		}
+	},
+	"require": {
+		"php": "^8.0"
+	},
+	"require-dev": {}
+}
