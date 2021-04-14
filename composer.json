@@ -18,8 +18,8 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"FigTree\\Framework": "src/",
-			"FigTree\\Framework\\Tests": "tests/"
+			"FigTree\\Framework\\": "src/",
+			"FigTree\\Framework\\Tests\\": "tests/"
 		}
 	},
 	"require": {
