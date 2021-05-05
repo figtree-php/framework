@@ -3,10 +3,10 @@
 namespace FigTree\Framework\Exceptions\Concerns;
 
 use Throwable;
-use LogicException;
 use ReflectionClass;
 use Psr\Log\LogLevel;
-use FigTree\Framework\Exceptions\Contracts\SevereExceptionInterface;
+use FigTree\Exceptions\LogicException;
+use FigTree\Exceptions\Contracts\SevereExceptionInterface;
 
 trait GetsSeverityLevels
 {

@@ -2,8 +2,11 @@
 
 namespace FigTree\Framework\Core;
 
-use LogicException;
-use RuntimeException;
+use FigTree\Exceptions\{
+	InvalidDirectoryException,
+	InvalidPathException,
+	UnreadablePathException
+};
 use FigTree\Framework\Support\Str;
 
 class Context
@@ -86,23 +89,24 @@ class Context
 	 *
 	 * @return $this
 	 *
-	 * @throws \LogicException
-	 * @throws \RuntimeException
+	 * @throws \FigTree\Exceptions\InvalidPathException
+	 * @throws \FigTree\Exceptions\InvalidDirectoryException
+	 * @throws \FigTree\Exceptions\UnreadablePathException
 	 */
 	protected function setDirectory(string $directory)
 	{
 		$dir = realpath($directory);
 
 		if (empty($dir)) {
-			throw new LogicException(sprintf('Directory %s does not exist.', $directory));
+			throw new InvalidPathException($directory);
 		}
 
 		if (!is_dir($dir)) {
-			throw new LogicException(sprintf('Path %s is not a directory', $dir));
+			throw new InvalidDirectoryException($dir);
 		}
 
 		if (!is_readable($dir)) {
-			throw new RuntimeException(sprintf('Directory %s is not readable.', $dir));
+			throw new UnreadablePathException($dir);
 		}
 
 		$this->directory = $dir;

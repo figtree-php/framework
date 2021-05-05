@@ -10,6 +10,13 @@
 			"role": "Creator"
 		}
 	],
+	"funding": [
+		{
+			"type": "github",
+			"url": "https://github.com/sponsors/alanondra"
+		}
+	],
+	"readme": "readme.md",
 	"support": {
 		"email": "figtree.php@gmail.com",
 		"source": "https://github.com/figtree-php/framework",
@@ -22,6 +29,14 @@
 			"FigTree\\Framework\\Tests\\": "tests/"
 		}
 	},
+	"suggest": {
+		"figtree-php/config": "Provides reading of PHP configuration files.",
+		"figtree-php/validation": "Provides an input validation and filtering system.",
+		"monolog/monolog": "An excellent and well-documented PSR-3 Logger implementation.",
+		"vlucas/phpdotenv": "Easy loading of sensitive information without committing them to your project's repository.",
+		"guzzlehttp/psr7": "Standard bearer implementation of HTTP message composition.",
+		"http-interop/http-factory-guzzle": "Adds missing factories from Guzzle."
+	},
 	"require": {
 		"php": "^8.0",
 		"ext-mbstring": "*",
@@ -30,7 +45,8 @@
 		"psr/http-server-handler": "^1.0",
 		"psr/http-server-middleware": "^1.0",
 		"psr/http-factory": "^1.0",
-		"psr/log": "^1.1"
+		"psr/log": "^1.1",
+		"figtree-php/exceptions": "^1.0"
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "^3.6",
