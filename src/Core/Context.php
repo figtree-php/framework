@@ -28,17 +28,16 @@ class Context
 	 *
 	 * @param string $label
 	 * @param mixed $default
-	 * @param boolean $localOnly
 	 *
 	 * @return mixed
 	 */
-	public function env(string $label, $default = null, bool $localOnly = false)
+	public function env(string $label, $default = null)
 	{
-		$value = getenv($label, $localOnly);
-
-		if ($value === false) {
+		if (!key_exists($label, $_ENV)) {
 			return $default;
 		}
+
+		$value = $_ENV[$label];
 
 		$trValue = trim($value);
 		$lcValue = strtolower(trim($value));
