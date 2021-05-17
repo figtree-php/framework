@@ -27,7 +27,10 @@
 		"psr-4": {
 			"FigTree\\Framework\\": "src/",
 			"FigTree\\Framework\\Tests\\": "tests/"
-		}
+		},
+		"files": [
+			"src/helpers.php"
+		]
 	},
 	"suggest": {
 		"figtree-php/config": "Provides reading of PHP configuration files.",
@@ -46,7 +49,8 @@
 		"psr/http-server-middleware": "^1.0",
 		"psr/http-factory": "^1.0",
 		"psr/log": "^1.1",
-		"figtree-php/exceptions": "^1.0"
+		"figtree-php/exceptions": "^1.0",
+		"symfony/polyfill-php81": "^1.22"
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "^3.6",
