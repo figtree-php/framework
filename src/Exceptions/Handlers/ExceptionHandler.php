@@ -5,10 +5,10 @@ namespace FigTree\Framework\Exceptions\Handlers;
 use DateTime;
 use Throwable;
 use Psr\Http\Message\ResponseInterface;
-use FigTree\Framework\Exceptions\Adapters\ExceptionResponseAdapter;
-use FigTree\Framework\Exceptions\Concerns\{
-	GetsErrorLevels,
-	GetsSeverityLevels,
+use FigTree\Framework\Exceptions\{
+	Contracts\ExceptionResponseAdapterInterface,
+	Concerns\GetsErrorLevels,
+	Concerns\GetsSeverityLevels,
 };
 
 class ExceptionHandler extends AbstractExceptionHandler
@@ -16,7 +16,7 @@ class ExceptionHandler extends AbstractExceptionHandler
 	use GetsErrorLevels;
 	use GetsSeverityLevels;
 
-	public function __construct(protected ExceptionResponseAdapter $exceptionResponseAdapter)
+	public function __construct(protected ExceptionResponseAdapterInterface $exceptionResponseAdapter)
 	{
 		//
 	}

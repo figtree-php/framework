@@ -4,31 +4,35 @@ namespace FigTree\Framework\Exceptions\Adapters;
 
 use Throwable;
 use Psr\Http\Message\ResponseInterface;
-use FigTree\Framework\Exceptions\Contracts\ExceptionResponseAdapterInterface;
-use FigTree\Framework\Exceptions\Contracts\ExceptionResponseMiddlewareInterface;
+use FigTree\Framework\Exceptions\Contracts\{
+	ExceptionResponseAdapterInterface,
+	ExceptionResponseStrategyInterface
+};
 
 class ExceptionResponseAdapter implements ExceptionResponseAdapterInterface
 {
-	protected array $middleware = [];
+	protected array $strategies = [];
 
-	public function __construct(array $middleware)
+	/**
+	 * Construct an instance of ExceptionResponseAdapter.
+	 *
+	 * @param array $strategies
+	 */
+	public function __construct(array $strategies = [])
 	{
-		foreach ($middleware as $mw) {
-			if ($mw instanceof ExceptionResponseMiddlewareInterface) {
-				$this->append($mw);
+		foreach ($strategies as $strategy) {
+			if ($strategy instanceof ExceptionResponseStrategyInterface) {
+				$this->addStrategy($strategy);
 			}
 		}
 	}
 
-	public function append(ExceptionResponseMiddlewareInterface $middleware)
+	/**
+	 * Add a Strategy.
+	 */
+	public function addStrategy(ExceptionResponseStrategyInterface $strategy)
 	{
-		array_push($this->middleware, $this->getCallable($middleware));
-		return $this;
-	}
-
-	public function prepend(ExceptionResponseMiddlewareInterface $middleware)
-	{
-		array_unshift($this->middleware, $this->getCallable($middleware));
+		array_push($this->strategies, $strategy);
 		return $this;
 	}
 
@@ -41,34 +45,14 @@ class ExceptionResponseAdapter implements ExceptionResponseAdapterInterface
 	 */
 	public function toResponse(Throwable $exception): ResponseInterface
 	{
-		$carry = fn ($stack, $mw)
-			=> fn ($exception)
-			=> $mw($exception, $stack);
+		foreach ($this->strategies as $strategy) {
+			if ($strategy instanceof ExceptionResponseStrategyInterface) {
+				if ($strategy->matches($exception)) {
+					return $strategy->process($exception);
+				}
+			}
+		}
 
-		$pipeline = array_reduce(array_reverse($this->middleware), $carry, $this->default());
-
-		return $pipeline($exception);
-	}
-
-	/**
-	 * The default callback to handle the value.
-	 *
-	 * @return mixed
-	 */
-	protected function default()
-	{
-		return function (Throwable $exception) {
-			throw $exception;
-		};
-	}
-
-	/**
-	 * Get a callable from an ExceptionResponseMiddleware.
-	 *
-	 * @return callable
-	 */
-	protected function getCallable(ExceptionResponseMiddlewareInterface $middleware)
-	{
-		return [$middleware, 'process'];
+		throw $exception;
 	}
 }
