@@ -3,12 +3,21 @@
 namespace FigTree\Framework\Core;
 
 use Throwable;
-use Psr\Container\ContainerInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
-use FigTree\Framework\Exceptions\Contracts\ExceptionHandlerInterface;
-use FigTree\Framework\Web\Emission\Contracts\EmitterInterface;
+use Psr\Container\{
+	ContainerInterface,
+	NotFoundExceptionInterface,
+};
+use Psr\Http\{
+	Message\ResponseInterface,
+	Message\ServerRequestInterface,
+	Server\RequestHandlerInterface,
+};
+use Psr\EventDispatcher\EventDispatcherInterface;
+use FigTree\Framework\{
+	Core\Events\ApplicationBooted,
+	Exceptions\Contracts\ExceptionHandlerInterface,
+	Web\Emission\Contracts\EmitterInterface,
+};
 
 class Application
 {
@@ -31,6 +40,16 @@ class Application
 	}
 
 	/**
+	 * Get the Context instance.
+	 *
+	 * @return \FigTree\Framework\Core\Context
+	 */
+	public function getContext(): Context
+	{
+		return $this->context;
+	}
+
+	/**
 	 * Get the Container instance.
 	 *
 	 * @return \Psr\Container\ContainerInterface
@@ -38,6 +57,24 @@ class Application
 	public function getContainer(): ContainerInterface
 	{
 		return $this->container;
+	}
+
+	/**
+	 * Dispatch an Event.
+	 *
+	 * @param object $event
+	 *
+	 * @return object Event after modification by the Dispatcher.
+	 */
+	public function dispatch(object $event): object
+	{
+		$dispatcher = $this->getEventDispatcher();
+
+		if (!empty($dispatcher)) {
+			$event = $dispatcher->dispatch($event);
+		}
+
+		return $event;
 	}
 
 	/**
@@ -72,7 +109,7 @@ class Application
 			$exceptionHandler->install();
 		}
 
-		$this->booted = true;
+		$this->dispatch(new ApplicationBooted($this));
 
 		return true;
 	}
@@ -105,7 +142,7 @@ class Application
 	 *
 	 * @return \Psr\Http\Message\ServerRequestInterface
 	 */
-	protected function getServerRequest(): ?ServerRequestInterface
+	protected function getServerRequest(): ServerRequestInterface
 	{
 		return $this->container->get(ServerRequestInterface::class);
 	}
@@ -115,7 +152,7 @@ class Application
 	 *
 	 * @return \Psr\Http\Server\RequestHandlerInterface
 	 */
-	protected function getRequestHandler(): ?RequestHandlerInterface
+	protected function getRequestHandler(): RequestHandlerInterface
 	{
 		return $this->container->get(RequestHandlerInterface::class);
 	}
@@ -125,7 +162,7 @@ class Application
 	 *
 	 * @return \FigTree\Framework\Web\Emission\Contracts\EmitterInterface
 	 */
-	protected function getEmitter(): ?EmitterInterface
+	protected function getEmitter(): EmitterInterface
 	{
 		return $this->container->get(EmitterInterface::class);
 	}
@@ -133,10 +170,30 @@ class Application
 	/**
 	 * Get the ExceptionHandler instance.
 	 *
-	 * @return \FigTree\Framework\Exceptions\Contracts\ExceptionHandlerInterface
+	 * @return \FigTree\Framework\Exceptions\Contracts\ExceptionHandlerInterface|null
 	 */
 	protected function getExceptionHandler(): ?ExceptionHandlerInterface
 	{
-		return $this->container->get(ExceptionHandlerInterface::class);
+		try {
+			return $this->container->get(ExceptionHandlerInterface::class);
+		} catch (NotFoundExceptionInterface) {
+			//
+		}
+		return null;
+	}
+
+	/**
+	 * Get the EventDispatcher instance.
+	 *
+	 * @return \Psr\EventDispatcher\EventDispatcherInterface|null
+	 */
+	protected function getEventDispatcher(): ?EventDispatcherInterface
+	{
+		try {
+			return $this->container->get(EventDispatcherInterface::class);
+		} catch (NotFoundExceptionInterface) {
+			//
+		}
+		return null;
 	}
 }
