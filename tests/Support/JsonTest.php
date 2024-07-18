@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace FigTree\Framework\Tests\Support;
 
 use JsonException;
+use PHPUnit\Framework\Attributes\Test;
 use FigTree\Framework\Support\Json;
 use FigTree\Framework\Tests\AbstractTestCase;
 
 class JsonTest extends AbstractTestCase
 {
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testEncode()
 	{
 		$array = ['a' => 1, 'b' => 2, 'c' => 3];
@@ -28,9 +27,7 @@ class JsonTest extends AbstractTestCase
 		$encoded = Json::encode($invalid);
 	}
 
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testDecode()
 	{
 		$array = ['a' => 1, 'b' => 2, 'c' => 3];

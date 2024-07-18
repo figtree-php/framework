@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace FigTree\Framework\Tests\Support;
 
+use PHPUnit\Framework\Attributes\Test;
 use FigTree\Framework\Support\Str;
 use FigTree\Framework\Tests\AbstractTestCase;
 
 class StrTest extends AbstractTestCase
 {
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testChar()
 	{
 		$this->assertEquals("\t", Str::char(9));
@@ -19,18 +18,14 @@ class StrTest extends AbstractTestCase
 		$this->assertEquals('€', Str::char(8364));
 	}
 
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testCountChars()
 	{
 		$this->assertEquals(['f' => 1, 'o' => 2], Str::countChars('foo'));
 		$this->assertEquals(['b' => 1, 'å' => 2, 'r' => 1], Str::countChars('båår'));
 	}
 
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testExpandPath()
 	{
 		$this->assertEquals('/a/b/c', Str::expandPath('/a/b/d/../c'));
@@ -44,9 +39,7 @@ class StrTest extends AbstractTestCase
 		$this->assertEquals('/test', Str::expandPath('/var/.////./user/./././..//.//../////../././.././test/////'));
 	}
 
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testHasUniqueChars()
 	{
 		$this->assertFalse(Str::hasUniqueChars('foo'));
@@ -54,27 +47,21 @@ class StrTest extends AbstractTestCase
 		$this->assertTrue(Str::hasUniqueChars('båzo'));
 	}
 
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testLength()
 	{
 		$this->assertEquals(3, Str::length('foo'));
 		$this->assertEquals(4, Str::length('båzo'));
 	}
 
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testLower()
 	{
 		$this->assertEquals('foo', Str::lower('FoO'));
 		$this->assertEquals('båzo', Str::lower('bÅzO'));
 	}
 
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testNormalizeEol()
 	{
 		$input = "a\r\nb\rc\nd\ve";
@@ -96,9 +83,7 @@ class StrTest extends AbstractTestCase
 		$this->assertEquals($withVT, Str::normalizeEol($input, Str::VTAB));
 	}
 
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testStartsWith()
 	{
 		$this->assertTrue(Str::startsWith('foobar', 'foo'));
@@ -107,9 +92,7 @@ class StrTest extends AbstractTestCase
 		$this->assertFalse(Str::startsWith('dårligbåzo', 'bra'));
 	}
 
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testUpper()
 	{
 		$this->assertEquals('FOO', Str::upper('fOo'));

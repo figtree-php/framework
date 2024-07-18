@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
-
+<ruleset
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd"
+>
 	<arg name="basepath" value="."/>
 	<arg name="cache" value=".phpcs-cache"/>
 	<arg name="colors"/>
 	<arg name="extensions" value="php"/>
 
-	<rule ref="PSR2">
+	<rule ref="PSR12">
 		<exclude name="Generic.Files.LineLength"/>
 		<exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
 		<exclude name="PSR2.Namespaces.UseDeclaration.MultipleDeclarations"/>
+		<properties>
+			<property name="tab-width" value="4"/>
+		</properties>
 	</rule>
 
 	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
@@ -18,6 +23,12 @@
 		<properties>
 			<property name="indent" value="4"/>
 			<property name="tabIndent" value="true"/>
+		</properties>
+	</rule>
+
+	<rule ref="Generic.Files.LineEndings">
+		<properties>
+			<property name="eolChar" value="\n"/>
 		</properties>
 	</rule>
 

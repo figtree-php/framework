@@ -8,14 +8,14 @@ use RuntimeException;
 
 class Str
 {
-	const CR = "\r";
-	const CRLF = "\r\n";
-	const FF = "\f";
-	const LF = "\n";
-	const TAB = "\t";
-	const VTAB = "\v";
+	public const CR = "\r";
+	public const CRLF = "\r\n";
+	public const FF = "\f";
+	public const LF = "\n";
+	public const TAB = "\t";
+	public const VTAB = "\v";
 
-	const DEFAULT_ENCODING = 'utf-8';
+	public const DEFAULT_ENCODING = 'utf-8';
 
 	/**
 	 * Get the character of a given code point.

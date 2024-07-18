@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace FigTree\Framework\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
+
 class HelperTest extends AbstractTestCase
 {
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testIsStringable()
 	{
 		$this->assertFalse(is_stringable(null));

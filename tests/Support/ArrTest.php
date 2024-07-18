@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace FigTree\Framework\Tests\Support;
 
+use PHPUnit\Framework\Attributes\Test;
 use FigTree\Framework\Support\Arr;
 use FigTree\Framework\Tests\AbstractTestCase;
 
 class ArrTest extends AbstractTestCase
 {
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testExcept()
 	{
 		$array = [
@@ -29,9 +28,7 @@ class ArrTest extends AbstractTestCase
 		$this->assertSame(['a' => 1, 'c' => 3], Arr::except($array, ['b']));
 	}
 
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testFind()
 	{
 		$array = [
@@ -46,9 +43,7 @@ class ArrTest extends AbstractTestCase
 		);
 	}
 
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testFirst()
 	{
 		$array = ['a', 'b', 'c'];
@@ -68,9 +63,7 @@ class ArrTest extends AbstractTestCase
 		}));
 	}
 
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testIndexOf()
 	{
 		$array = [
@@ -85,9 +78,7 @@ class ArrTest extends AbstractTestCase
 		);
 	}
 
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testLast()
 	{
 		$array = ['a', 'b', 'c'];
@@ -107,9 +98,7 @@ class ArrTest extends AbstractTestCase
 		}));
 	}
 
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testOneOf()
 	{
 		$array = [1, 3, 5];
@@ -127,9 +116,7 @@ class ArrTest extends AbstractTestCase
 		$this->assertNull(Arr::oneOf($array, '3', true));
 	}
 
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testOnly()
 	{
 		$array = [
@@ -147,9 +134,7 @@ class ArrTest extends AbstractTestCase
 		$this->assertSame(['a' => 1, 'c' => 3], Arr::only($array, ['a', 'c']));
 	}
 
-	/**
-	 * @small
-	 */
+	#[Test]
 	public function testPull()
 	{
 		$array = [

@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" colors="true" convertDeprecationsToExceptions="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" printerClass="FigTree\Framework\Tests\TestPrinter" failOnRisky="true" failOnWarning="true" beStrictAboutChangesToGlobalState="true" beStrictAboutOutputDuringTests="true" beStrictAboutResourceUsageDuringSmallTests="true" beStrictAboutTodoAnnotatedTests="true" verbose="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+<phpunit
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.2/phpunit.xsd"
+	colors="true"
+	failOnDeprecation="true"
+	failOnIncomplete="true"
+	failOnSkipped="true"
+	failOnNotice="true"
+	failOnRisky="true"
+	failOnWarning="true"
+	failOnEmptyTestSuite="true"
+	beStrictAboutChangesToGlobalState="true"
+	beStrictAboutOutputDuringTests="true"
+	beStrictAboutTestsThatDoNotTestAnything="true"
+>
 	<testsuites>
 		<testsuite name="FigTree Framework Test Suite">
 			<directory suffix="Test.php">tests</directory>
 		</testsuite>
 	</testsuites>
-	<coverage processUncoveredFiles="true">
+	<source>
 		<include>
 			<directory suffix=".php">src</directory>
 		</include>
-	</coverage>
+	</source>
 </phpunit>
