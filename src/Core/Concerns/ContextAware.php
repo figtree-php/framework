@@ -6,10 +6,10 @@ namespace FigTree\Framework\Core\Concerns;
 
 use FigTree\Framework\Core\Context;
 
-trait UsesContext
+trait ContextAware
 {
 	/**
-	 * Context instance
+	 * Application Context
 	 *
 	 * @var \FigTree\Framework\Core\Context
 	 */
@@ -18,14 +18,10 @@ trait UsesContext
 	/**
 	 * Set the Context instance.
 	 *
-	 * @param  \FigTree\Framework\Core\Context  $context
-	 *
-	 * @return $this
+	 * @param \FigTree\Framework\Core\Context $context
 	 */
 	public function setContext(Context $context)
 	{
 		$this->context = $context;
-
-		return $this;
 	}
 }

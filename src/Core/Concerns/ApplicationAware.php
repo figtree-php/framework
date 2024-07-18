@@ -6,10 +6,10 @@ namespace FigTree\Framework\Core\Concerns;
 
 use FigTree\Framework\Core\Application;
 
-trait UsesApplication
+trait ApplicationAware
 {
 	/**
-	 * Application instance
+	 * Application
 	 *
 	 * @var \FigTree\Framework\Core\Application
 	 */
@@ -18,14 +18,10 @@ trait UsesApplication
 	/**
 	 * Set the Application instance.
 	 *
-	 * @param  \FigTree\Framework\Core\Application  $app
-	 *
-	 * @return $this
+	 * @param \FigTree\Framework\Core\Application $app
 	 */
 	public function setApp(Application $app)
 	{
 		$this->app = $app;
-
-		return $this;
 	}
 }
