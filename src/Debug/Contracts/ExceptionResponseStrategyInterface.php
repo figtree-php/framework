@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FigTree\Framework\Exceptions\Contracts;
+namespace FigTree\Framework\Debug\Contracts;
 
 use Throwable;
 use Psr\Http\Message\ResponseInterface;
@@ -19,7 +19,7 @@ interface ExceptionResponseStrategyInterface
 	public function matches(Throwable $exception): bool;
 
 	/**
-	 * Convert an Exception into a Response.
+	 * Convert a Throwable into a Response.
 	 *
 	 * @param \Throwable $exception
 	 *

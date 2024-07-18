@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace FigTree\Framework\Exceptions\Contracts;
+namespace FigTree\Framework\Debug\Contracts;
 
 use Throwable;
 use Psr\Http\Message\ResponseInterface;
-use FigTree\Framework\Exceptions\Contracts\ExceptionResponseStrategyInterface;
 
 interface ExceptionResponseAdapterInterface
 {
@@ -22,5 +21,5 @@ interface ExceptionResponseAdapterInterface
 	 *
 	 * @return \Psr\Http\Message\ResponseInterface
 	 */
-	public function toResponse(Throwable $exception): ResponseInterface;
+	public function adapt(Throwable $exception): ResponseInterface;
 }

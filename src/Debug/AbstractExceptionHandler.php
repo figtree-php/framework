@@ -2,15 +2,17 @@
 
 declare(strict_types=1);
 
-namespace FigTree\Framework\Exceptions\Handlers;
+namespace FigTree\Framework\Debug;
 
 use Psr\Log\LoggerAwareInterface;
-use FigTree\Framework\Logging\Concerns\UsesLogger;
-use FigTree\Framework\Exceptions\Contracts\ExceptionHandlerInterface;
+use Psr\Log\LoggerAwareTrait;
+use FigTree\Framework\Debug\Contracts\ExceptionHandlerInterface;
 
-abstract class AbstractExceptionHandler implements ExceptionHandlerInterface, LoggerAwareInterface
+abstract class AbstractExceptionHandler implements
+	ExceptionHandlerInterface,
+	LoggerAwareInterface
 {
-	use UsesLogger;
+	use LoggerAwareTrait;
 
 	/**
 	 * Installation flag.

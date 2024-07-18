@@ -2,23 +2,25 @@
 
 declare(strict_types=1);
 
-namespace FigTree\Framework\Exceptions\Strategies;
+namespace FigTree\Framework\Debug\Strategies;
 
 use Throwable;
 use Psr\Http\Message\ResponseInterface;
 use FigTree\Framework\Web\Concerns\{
-	UsesResponseFactory,
-	UsesStreamFactory,
+	ResponseFactoryAware,
+	StreamFactoryAware,
 };
 use FigTree\Framework\Web\Contracts\{
 	ResponseFactoryAwareInterface,
 	StreamFactoryAwareInterface,
 };
 
-class DefaultStrategy extends AbstractStrategy implements ResponseFactoryAwareInterface, StreamFactoryAwareInterface
+class DefaultStrategy extends AbstractStrategy implements
+	ResponseFactoryAwareInterface,
+	StreamFactoryAwareInterface
 {
-	use UsesResponseFactory;
-	use UsesStreamFactory;
+	use ResponseFactoryAware;
+	use StreamFactoryAware;
 
 	/**
 	 * Check if this Strategy is applicable to the given Exception.

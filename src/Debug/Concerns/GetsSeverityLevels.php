@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace FigTree\Framework\Exceptions\Concerns;
+namespace FigTree\Framework\Debug\Concerns;
 
 use Throwable;
+use LogicException;
 use ReflectionClass;
 use Psr\Log\LogLevel;
-use FigTree\Exceptions\LogicException;
-use FigTree\Exceptions\Contracts\SevereExceptionInterface;
 
 trait GetsSeverityLevels
 {
@@ -65,10 +64,6 @@ trait GetsSeverityLevels
 	 */
 	public function getSeverity(Throwable $exception): int
 	{
-		if ($exception instanceof SevereExceptionInterface) {
-			return $exception->getSeverity();
-		}
-
 		$exceptionClass = get_class($exception);
 
 		if (key_exists($exceptionClass, $this->exceptionSeverity)) {
@@ -89,7 +84,12 @@ trait GetsSeverityLevels
 	public function setSeverity(string $exceptionClass, int $severity)
 	{
 		if (!is_subclass_of($exceptionClass, Throwable::class, true)) {
-			throw new LogicException(sprintf('Method %s expects name of class implementing %s; %s provided.', __METHOD__, Throwable::class, $exceptionClass));
+			throw new LogicException(sprintf(
+				'Method %s expects name of class implementing %s; %s provided.',
+				__METHOD__,
+				Throwable::class,
+				$exceptionClass
+			));
 		}
 
 		$this->exceptionSeverity[$exceptionClass] = $severity;

@@ -6,7 +6,7 @@ namespace FigTree\Framework\Exceptions\Adapters;
 
 use Throwable;
 use Psr\Http\Message\ResponseInterface;
-use FigTree\Framework\Exceptions\Contracts\{
+use FigTree\Framework\Debug\Contracts\{
 	ExceptionResponseAdapterInterface,
 	ExceptionResponseStrategyInterface
 };
@@ -39,13 +39,15 @@ class ExceptionResponseAdapter implements ExceptionResponseAdapterInterface
 	}
 
 	/**
-	 * Run the Throwable through the Middleware and fetch the resulting Response.
+	 * @inheritDoc
 	 *
 	 * @param \Throwable $exception
 	 *
 	 * @return \Psr\Http\Message\ResponseInterface
+	 *
+	 * @throws \Throwable
 	 */
-	public function toResponse(Throwable $exception): ResponseInterface
+	public function adapt(Throwable $exception): ResponseInterface
 	{
 		foreach ($this->strategies as $strategy) {
 			if ($strategy instanceof ExceptionResponseStrategyInterface) {

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace FigTree\Framework\Core;
 
-use FigTree\Exceptions\{
+use FigTree\Framework\Support\Str;
+use FigTree\Framework\Exceptions\{
 	InvalidDirectoryException,
 	InvalidPathException,
 	UnreadablePathException
 };
-use FigTree\Framework\Support\Str;
 
 class Context
 {

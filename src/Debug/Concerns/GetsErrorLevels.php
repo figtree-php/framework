@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FigTree\Framework\Exceptions\Concerns;
+namespace FigTree\Framework\Debug\Concerns;
 
 trait GetsErrorLevels
 {

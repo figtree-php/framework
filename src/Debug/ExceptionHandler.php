@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace FigTree\Framework\Exceptions\Handlers;
+namespace FigTree\Framework\Debug;
 
 use DateTime;
 use Throwable;
 use Psr\Http\Message\ResponseInterface;
-use FigTree\Framework\Exceptions\{
+use FigTree\Framework\Debug\{
 	Contracts\ExceptionResponseAdapterInterface,
 	Concerns\GetsErrorLevels,
 	Concerns\GetsSeverityLevels,
@@ -65,7 +65,7 @@ class ExceptionHandler extends AbstractExceptionHandler
 	 */
 	public function toResponse(Throwable $exception): ResponseInterface
 	{
-		return $this->exceptionResponseAdapter->toResponse($exception);
+		return $this->exceptionResponseAdapter->adapt($exception);
 	}
 
 	/**
@@ -120,8 +120,7 @@ class ExceptionHandler extends AbstractExceptionHandler
 
 				if (!empty($context)) {
 					try {
-						error_log(serialize($context), 3, $destination);
-						error_log(PHP_EOL, 3, $destination);
+						error_log(serialize($context) . PHP_EOL, 3, $destination);
 					} catch (Throwable $exc) {
 						//
 					}

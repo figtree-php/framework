@@ -15,11 +15,8 @@ use Psr\Http\{
 	Server\RequestHandlerInterface,
 };
 use Psr\EventDispatcher\EventDispatcherInterface;
-use FigTree\Framework\{
-	Core\Events\ApplicationBooted,
-	Exceptions\Contracts\ExceptionHandlerInterface,
-	Web\Emission\Contracts\EmitterInterface,
-};
+use FigTree\Framework\Web\Emission\Contracts\EmitterInterface;
+use FigTree\Framework\Debug\Contracts\ExceptionHandlerInterface;
 
 class Application
 {
@@ -111,7 +108,7 @@ class Application
 			$exceptionHandler->install();
 		}
 
-		$this->dispatch(new ApplicationBooted($this));
+		$this->dispatch(new Events\ApplicationBooted($this));
 
 		return true;
 	}

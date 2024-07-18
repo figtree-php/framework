@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FigTree\Framework\Exceptions\Contracts;
+namespace FigTree\Framework\Debug\Contracts;
 
 use Throwable;
 use Psr\Http\Message\ResponseInterface;
