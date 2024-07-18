@@ -6,8 +6,13 @@ namespace FigTree\Framework\Web\Concerns;
 
 use Psr\Http\Message\ResponseFactoryInterface;
 
-trait UsesResponseFactory
+trait ResponseFactoryAware
 {
+	/**
+	 * ResponseFactory
+	 *
+	 * @var \Psr\Http\Message\ResponseFactoryInterface
+	 */
 	protected ResponseFactoryInterface $responseFactory;
 
 	/**

@@ -6,8 +6,13 @@ namespace FigTree\Framework\Web\Concerns;
 
 use Psr\Http\Message\ServerRequestInterface;
 
-trait UsesServerRequest
+trait ServerRequestAware
 {
+	/**
+	 * ServerRequest
+	 *
+	 * @var \Psr\Http\Message\ServerRequestInterface
+	 */
 	protected ServerRequestInterface $serverRequest;
 
 	/**

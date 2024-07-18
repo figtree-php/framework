@@ -6,8 +6,13 @@ namespace FigTree\Framework\Web\Concerns;
 
 use Psr\Http\Message\UploadedFileFactoryInterface;
 
-trait UsesUploadedFileFactory
+trait UploadedFileFactoryAware
 {
+	/**
+	 * UploadedFileFactory
+	 *
+	 * @var \Psr\Http\Message\UploadedFileFactoryInterface
+	 */
 	protected UploadedFileFactoryInterface $uploadedFileFactory;
 
 	/**

@@ -6,8 +6,13 @@ namespace FigTree\Framework\Web\Concerns;
 
 use Psr\Http\Message\UriFactoryInterface;
 
-trait UsesUriFactory
+trait UriFactoryAware
 {
+	/**
+	 * UriFactory
+	 *
+	 * @var \Psr\Http\Message\UriFactoryInterface
+	 */
 	protected UriFactoryInterface $uriFactory;
 
 	/**

@@ -6,8 +6,13 @@ namespace FigTree\Framework\Web\Concerns;
 
 use Psr\Http\Message\StreamFactoryInterface;
 
-trait UsesStreamFactory
+trait StreamFactoryAware
 {
+	/**
+	 * StreamFactory
+	 *
+	 * @var \Psr\Http\Message\StreamFactoryInterface
+	 */
 	protected StreamFactoryInterface $streamFactory;
 
 	/**
