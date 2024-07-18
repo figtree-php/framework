@@ -9,13 +9,13 @@ use Psr\Http\Message\ResponseInterface;
 interface EmitterStrategyInterface
 {
 	/**
-	 * Check if this is the appropriate Emitter for the Response.
+	 * Check if this Emitter is applicable to the given Response.
 	 *
 	 * @param \Psr\Http\Message\ResponseInterface $response
 	 *
 	 * @return boolean
 	 */
-	public function canEmit(ResponseInterface $response): bool;
+	public function matches(ResponseInterface $response): bool;
 
 	/**
 	 * Emit the Response.

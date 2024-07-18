@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace FigTree\Framework\Web\Emission\Strategies;
 
 use Psr\Http\Message\ResponseInterface;
-use FigTree\Exceptions\{
+use FigTree\Framework\Web\Emission\Exceptions\{
 	HeadersSentException,
 	OutputSentException,
 };
 
+/**
+ * Default Response Emitter
+ */
 class DefaultEmitterStrategy extends AbstractEmitterStrategy
 {
 	/**
@@ -23,19 +26,19 @@ class DefaultEmitterStrategy extends AbstractEmitterStrategy
 	}
 
 	/**
-	 * Check if this is the appropriate Emitter for the Response.
+	 * @inheritDoc
 	 *
 	 * @param \Psr\Http\Message\ResponseInterface $response
 	 *
 	 * @return boolean
 	 */
-	public function canEmit(ResponseInterface $response): bool
+	public function matches(ResponseInterface $response): bool
 	{
 		return true;
 	}
 
 	/**
-	 * Emit the Response.
+	 * @inheritDoc
 	 *
 	 * @param \Psr\Http\Message\ResponseInterface $response
 	 *
@@ -66,7 +69,7 @@ class DefaultEmitterStrategy extends AbstractEmitterStrategy
 		$line = null;
 
 		if (headers_sent($file, $line)) {
-			throw (new HeadersSentException())->setLocation($file, $line);
+			throw new HeadersSentException();
 		}
 
 		if (ob_get_level() > 0 || ob_get_length() > 0) {
@@ -95,31 +98,11 @@ class DefaultEmitterStrategy extends AbstractEmitterStrategy
 	 */
 	protected function emitHeaders(ResponseInterface $response): void
 	{
-		$headers = $response->getHeaders();
+		foreach (array_keys($response->getHeaders()) as $name) {
+			$values = $response->getHeader($name);
 
-		$manual = [
-			'host',
-		];
-
-		$multiLine = [
-			'set-cookie',
-		];
-
-		foreach ($headers as $header => $values) {
-			$lc = strtolower($header);
-
-			if (!in_array($lc, $manual)) {
-				if (in_array($lc, $multiLine)) {
-					foreach ($values as $i => $value) {
-						$line = sprintf('%s: %s', $header, strval($value));
-
-						header($line, false);
-					}
-				} else {
-					$line = sprintf('%s: %s', $header, $response->getHeaderLine($header));
-
-					header($line, true);
-				}
+			foreach ($values as $value) {
+				header(sprintf('%s: %s', $name, $this->sanitizeHeaderValue($value)), false);
 			}
 		}
 	}
@@ -143,11 +126,8 @@ class DefaultEmitterStrategy extends AbstractEmitterStrategy
 			echo $body;
 		} else {
 			if ($this->emitBytes > 0) {
-				$i = 0;
-
-				while (!$body->eof() && $i < PHP_INT_MAX) {
+				while (!$body->eof()) {
 					echo $body->read($this->emitBytes);
-					$i++;
 				}
 			} elseif (!$body->eof()) {
 				echo $body->getContents();
@@ -167,5 +147,17 @@ class DefaultEmitterStrategy extends AbstractEmitterStrategy
 		$status = $response->getStatusCode();
 
 		return ($status >= 400) ? 1 : 0;
+	}
+
+	/**
+	 * Sanitize a header value to prevent header injection.
+	 *
+	 * @param string $value
+	 *
+	 * @return string
+	 */
+	protected function sanitizeHeaderValue(string $value): string
+	{
+		return str_replace(["\r", "\n"], ['\r', '\n'], $value);
 	}
 }

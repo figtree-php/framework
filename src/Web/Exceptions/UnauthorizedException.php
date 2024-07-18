@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace FigTree\Framework\Web\Exceptions;
 
-use Exception;
+use RuntimeException;
 use FigTree\Framework\Web\Exceptions\Concerns\HasStatusCode;
 use FigTree\Framework\Web\Exceptions\Contracts\HttpExceptionInterface;
 
-class UnauthorizedException extends Exception implements HttpExceptionInterface
+class UnauthorizedException extends RuntimeException implements HttpExceptionInterface
 {
 	use HasStatusCode;
 

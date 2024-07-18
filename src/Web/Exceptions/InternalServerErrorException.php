@@ -25,12 +25,4 @@ class InternalServerErrorException extends Exception implements HttpExceptionInt
 	 * @var string
 	 */
 	protected string $reason = 'Internal Server Error';
-
-	public function onLine(string $file, int $line)
-	{
-		$this->file = $file;
-		$this->line = $line;
-
-		return $this;
-	}
 }
