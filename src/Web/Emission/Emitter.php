@@ -6,13 +6,26 @@ namespace FigTree\Framework\Web\Emission;
 
 use RuntimeException;
 use Psr\Http\Message\ResponseInterface;
-use FigTree\Framework\Web\Emission\Contracts\{
-	EmitterInterface,
-	EmitterStrategyInterface,
+use FigTree\Framework\Web\Emission\{
+	Contracts\EmitterInterface,
+	Contracts\EmitterStrategyInterface,
+	Strategies\DefaultEmitterStrategy,
 };
 
 class Emitter implements EmitterInterface
 {
+	/**
+	 * Create an Emitter with the DefaultEmitterStrategy.
+	 *
+	 * @return static
+	 */
+	public static function create(): static
+	{
+		return new static([
+			new DefaultEmitterStrategy()
+		]);
+	}
+
 	/**
 	 * Sequential list of possible EmitterStrategies.
 	 *
