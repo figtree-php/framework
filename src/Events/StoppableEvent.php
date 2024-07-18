@@ -6,7 +6,7 @@ namespace FigTree\Framework\Events;
 
 use Psr\EventDispatcher\StoppableEventInterface;
 
-abstract class StoppableEvent extends AbstractEvent implements StoppableEventInterface
+abstract class StoppableEvent implements StoppableEventInterface
 {
 	protected bool $propagationStopped = false;
 

@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace FigTree\Framework\Core\Events;
 
 use FigTree\Framework\Core\Application;
-use FigTree\Framework\Events\AbstractEvent;
 
-class ApplicationBooted extends AbstractEvent
+class ApplicationBooted
 {
 	/**
 	 * Construct the ApplicationBooted Event.
+	 *
+	 * @param \FigTree\Framework\Core\Application $app
 	 */
 	public function __construct(protected Application $app)
 	{
