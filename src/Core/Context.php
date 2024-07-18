@@ -90,9 +90,9 @@ class Context
 	 *
 	 * @return $this
 	 *
-	 * @throws \FigTree\Exceptions\InvalidPathException
-	 * @throws \FigTree\Exceptions\InvalidDirectoryException
-	 * @throws \FigTree\Exceptions\UnreadablePathException
+	 * @throws \FigTree\Framework\Exceptions\InvalidPathException
+	 * @throws \FigTree\Framework\Exceptions\InvalidDirectoryException
+	 * @throws \FigTree\Framework\Exceptions\UnreadablePathException
 	 */
 	protected function setDirectory(string $directory)
 	{

@@ -9,11 +9,11 @@ use Psr\Container\{
 	ContainerInterface,
 	NotFoundExceptionInterface,
 };
-use Psr\Http\{
-	Message\ResponseInterface,
-	Message\ServerRequestInterface,
-	Server\RequestHandlerInterface,
+use Psr\Http\Message\{
+	ResponseInterface,
+	ServerRequestInterface,
 };
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use FigTree\Framework\Web\Emission\Contracts\EmitterInterface;
 use FigTree\Framework\Debug\Contracts\ExceptionHandlerInterface;
@@ -33,8 +33,10 @@ class Application
 	 * @param \FigTree\Framework\Core\Context $context
 	 * @param \Psr\Container\ContainerInterface $container
 	 */
-	public function __construct(protected Context $context, protected ContainerInterface $container)
-	{
+	public function __construct(
+		protected Context $context,
+		protected ContainerInterface $container
+	) {
 		//
 	}
 
@@ -169,7 +171,7 @@ class Application
 	/**
 	 * Get the ExceptionHandler instance.
 	 *
-	 * @return \FigTree\Framework\Exceptions\Contracts\ExceptionHandlerInterface|null
+	 * @return \FigTree\Framework\Debug\Contracts\ExceptionHandlerInterface|null
 	 */
 	protected function getExceptionHandler(): ?ExceptionHandlerInterface
 	{
