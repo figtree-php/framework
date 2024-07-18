@@ -6,7 +6,7 @@ if (!function_exists('is_stringable')) {
 	/**
 	 * Check if the given value is a string or an object which can be cast as a string via strval.
 	 *
-	 * @param [type] $value
+	 * @param mixed $value
 	 *
 	 * @return boolean
 	 */
