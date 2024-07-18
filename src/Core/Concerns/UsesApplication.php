@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FigTree\Framework\Core\Concerns;
 
 use FigTree\Framework\Core\Application;

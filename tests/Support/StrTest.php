@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FigTree\Framework\Tests\Support;
 
 use FigTree\Framework\Support\Str;

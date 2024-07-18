@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FigTree\Framework\Core\Contracts;
 
 use FigTree\Framework\Core\Context;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FigTree\Framework\Web\Contracts;
 
 use Psr\Http\Message\StreamFactoryInterface;

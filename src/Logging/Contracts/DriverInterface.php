@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FigTree\Framework\Logging\Contracts;
 
 use Psr\Log\LoggerInterface;
