@@ -4,15 +4,16 @@
 	xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.2/phpunit.xsd"
 	colors="true"
 	failOnDeprecation="true"
+	failOnNotice="true"
+	failOnWarning="true"
 	failOnIncomplete="true"
 	failOnSkipped="true"
-	failOnNotice="true"
 	failOnRisky="true"
-	failOnWarning="true"
 	failOnEmptyTestSuite="true"
 	beStrictAboutChangesToGlobalState="true"
 	beStrictAboutOutputDuringTests="true"
 	beStrictAboutTestsThatDoNotTestAnything="true"
+	cacheDirectory=".phpunit.cache"
 >
 	<testsuites>
 		<testsuite name="FigTree Framework Test Suite">
